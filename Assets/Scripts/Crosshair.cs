@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
+    public Sprite Scalpel;
+    public Sprite Syringe;
+    public Sprite Stethoscope;
 
     private void Start()
     {
@@ -15,5 +18,12 @@ public class Crosshair : MonoBehaviour
     {
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector2(cursorPos.x, cursorPos.y);
+    }
+
+    public void changeCrossHair()
+    {
+        GetComponent<SpriteRenderer>().sprite = Scalpel;
+        GetComponent<SpriteRenderer>().sprite = Syringe;
+        GetComponent<SpriteRenderer>().sprite = Stethoscope;
     }
 }

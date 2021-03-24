@@ -8,4 +8,8 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(sceneToChangeTo);
     }
+    public void RestartCurrent()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

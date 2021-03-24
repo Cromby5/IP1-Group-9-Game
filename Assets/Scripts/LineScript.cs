@@ -16,7 +16,6 @@ public class LineScript : MonoBehaviour
     private Vector3 startPos;    // Start position of line
     private Vector3 endPos;    // End position of line
 
-
     // List to keep track of all Lines spawned by this script.
     List<LineTest> LineList = new List<LineTest>();
 

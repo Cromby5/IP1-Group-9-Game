@@ -8,7 +8,6 @@ using UnityEngine.Rendering;
 public class LineTest : MonoBehaviour
 {
     public LineScript Drawer = null;
-    public Remover RemoveObj = null;
     public Health HealthUpdate = null;
 
     void Update()
@@ -31,13 +30,15 @@ public class LineTest : MonoBehaviour
             case "CutL":
                 Debug.Log("hello");
                 Drawer.DestroyLine(this);
-                RemoveObj.Kill();
                 //Health stays same so no update
                 break;
-
-            default:
+            case "Wound":
+                Debug.Log("hello Wound");
                 Drawer.DestroyLine(this);
+                break;
+            default:
                 Debug.Log("default");
+                Drawer.DestroyLine(this);
                 //Health removed
                 HealthUpdate.RemoveHealth();
                 break;

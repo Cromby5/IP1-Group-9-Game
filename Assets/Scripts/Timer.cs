@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 {
     public float timeRemaining = 10;
     public Text Timer_Display = null;
-    public Text Failure_Display = null;
+    public Restart Restart = null;
 
     void Update()
     {
@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
         else
         {
             timeRemaining = -0.5f;
-            StartCoroutine("RestartLevel");
+            Restart.StartCoroutine("RestartLevel");
         }
         DisplayTime(timeRemaining);
 
@@ -35,15 +35,4 @@ public class Timer : MonoBehaviour
         Timer_Display.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    IEnumerator RestartLevel()
-    {
-        //Failure text 
-        Failure_Display.gameObject.SetActive(true);
-        //Wait for x seconds
-        yield return new WaitForSeconds(3f);
-        //Restart
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //Stop This Coroutine
-        StopCoroutine("RestartLevel");
-    }
 }
