@@ -5,8 +5,7 @@ using UnityEngine;
 public class SyringeScript : MonoBehaviour
 {
     public Health HealthUpdate = null;
-    public InjectL InjectL;
-
+    GameObject InjectL = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +26,8 @@ public class SyringeScript : MonoBehaviour
             {
                 case "InjectL":
                     Debug.Log("Inject");
-                    InjectL.Remove();
-                    Destroy(hit.collider.gameObject);
+                    InjectL = GameObject.Find(hit.collider.gameObject.name);
+                    Destroy(InjectL);
                     break;
                 default:
                     Debug.Log(hit.collider.gameObject.name);

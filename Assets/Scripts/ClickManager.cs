@@ -16,11 +16,19 @@ public class ClickManager : MonoBehaviour
 
     public Health Health = null;
     public Timer Timer = null;
+    public HealthBar Healthbar = null;
+    public GameObject Watch = null;
+
     void Start()
     {
         //Enable these if hard difficulty is selected. Pass through value between scences
-        Health.gameObject.SetActive(true);
-        Timer.gameObject.SetActive(true);
+        if (Hard.HardEnable == true)
+        {
+            Health.gameObject.SetActive(true);
+            Timer.gameObject.SetActive(true);
+            Healthbar.gameObject.SetActive(true);
+            Watch.gameObject.SetActive(true);
+        }
     }
     void Update()
     {

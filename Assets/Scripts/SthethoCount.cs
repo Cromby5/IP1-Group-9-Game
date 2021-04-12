@@ -17,7 +17,8 @@ public class SthethoCount : MonoBehaviour
     {
         
     }
-    public void RemoveS()
+
+    void OnDestroy()
     {
         Win.SthethoList.Remove(this);
     }

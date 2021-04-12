@@ -22,7 +22,6 @@ public class Health : MonoBehaviour
     void Update()
     {
         Health_Display.text = Life.ToString();
-       
     }
 
     public void RemoveHealth()

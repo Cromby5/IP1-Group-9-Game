@@ -6,15 +6,22 @@ public class CutL : MonoBehaviour
 {
    public WinCheck Win;
 
+    public float speed = 0.2f;
+    //Default DirectionX and Y are set 
+    protected float directionX = 1.0f;
+
     void Start()
     {
         Win.CutList.Add(this);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-      
+        Vector3 position = transform.localPosition;
+        position.x += speed * directionX;
+        transform.localPosition = position;
+        StartCoroutine("Flip");
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -24,12 +31,7 @@ public class CutL : MonoBehaviour
         {
             case "LineT(Clone)":
                 Debug.Log("ByeCut");
-                //ColliderContainsPoint();
-                //Collider check??
-                Win.CutList.Remove(this);
-
                 Destroy(GameObject.FindWithTag("Cut"));
-                //Destroy();
                 Destroy(this.gameObject);
                 break;
         }
@@ -42,5 +44,17 @@ public class CutL : MonoBehaviour
             return true;
         else
             return false;
+    }
+    private void OnDestroy()
+    {
+        Win.CutList.Remove(this);
+    }
+    IEnumerator Flip()
+    {
+        //This is because collison broke idk
+        yield return new WaitForSeconds(0.3f);
+        directionX = -directionX;
+        StopCoroutine("Flip");
+
     }
 }

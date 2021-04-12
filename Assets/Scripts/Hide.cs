@@ -11,7 +11,9 @@ public class Hide : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Box.SetActive(true);
+        Doctor.SetActive(true);
+        Intro.SetActive(true);
     }
 
     // Update is called once per frame

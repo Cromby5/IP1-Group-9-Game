@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TweezerScript : MonoBehaviour
 {
-    public Leech Leech;
+    public Leech LeechTemp;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +24,13 @@ public class TweezerScript : MonoBehaviour
             switch (hit.collider.gameObject.name)
             {
                 case "Leeches_Jar":
-                    Leech.gameObject.SetActive(true);
+                    Leech LeechClone = Instantiate(LeechTemp);
+                    LeechClone.gameObject.SetActive(true);
+                    break;
+                case "Leech(Clone)":
+                    Debug.Log("Hi Le");
+                    //LeechClone = GameObject.Find(hit.collider.gameObject.name);
+                    //LeechClone.SetFollowMouse();
                     break;
                 default:
                     Debug.Log(hit.collider.gameObject.name);
