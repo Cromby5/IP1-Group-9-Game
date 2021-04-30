@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hide : MonoBehaviour
 {
+    //GameObjects to show/hide
     public GameObject Box;
     public GameObject Doctor;
     public GameObject Intro;
@@ -11,22 +12,23 @@ public class Hide : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Show at start of level
         Box.SetActive(true);
         Doctor.SetActive(true);
         Intro.SetActive(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        //Start Hide
         StartCoroutine("HideBox");
     }
 
     IEnumerator HideBox()
     {
+        //Hide after x seconds
         yield return new WaitForSeconds(3f);
+        //Hide the intro text, box and doctor
         Box.SetActive(false);
         Doctor.SetActive(false);
         Intro.SetActive(false);
+        //Stop this Coroutine
+        StopCoroutine("HideBox");
     }
 }

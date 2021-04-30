@@ -5,24 +5,22 @@ using UnityEngine;
 public class Instructions : MonoBehaviour
 {
     public Rules rules;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-      
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AudioSource Menu;
 
     public void ShowRules()
     {
+        //Play menu sound 
+        Menu.Play();
+        //Activate rule display
         rules.gameObject.SetActive(true);
 
-
+    }
+    public void HideRules()
+    {
+        //Play menu sound
+        Menu.Play();
+        //Display rule display
+        rules.gameObject.SetActive(false);
 
     }
 }

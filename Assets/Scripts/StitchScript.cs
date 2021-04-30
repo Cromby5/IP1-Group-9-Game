@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class StitchScript : LineScript
 {
-   
+   //Same as Line Script
 
 }

@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class SthethoCount : MonoBehaviour
 {
+    //Win Script
     public WinCheck Win;
 
-    // Start is called before the first frame update
+   
     void Start()
     {
+        //Add this object to the list
         Win.SthethoList.Add(this);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnDestroy()
     {
+        //Remove this object from the list
         Win.SthethoList.Remove(this);
     }
 }

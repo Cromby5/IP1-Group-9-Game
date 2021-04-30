@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class TweezerScript : MonoBehaviour
 {
-    public Leech LeechTemp;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Leech LeechTemp; //Leech template to use
+    public Crosshair Cross; // Crosshair 
 
+
+    private void OnEnable()
+    {
+        //Tweezer crosshair
+        Cross.CrossHairTweezer();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -20,11 +22,13 @@ public class TweezerScript : MonoBehaviour
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
-            //1st basic test of raycast stuff
+            
             switch (hit.collider.gameObject.name)
             {
                 case "Leeches_Jar":
+                    //Make a new leech using the template
                     Leech LeechClone = Instantiate(LeechTemp);
+                    //Activate the new clone object
                     LeechClone.gameObject.SetActive(true);
                     break;
                 case "Leech(Clone)":

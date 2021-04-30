@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Leech : MonoBehaviour
 {
+    //Win script for list
     public WinCheck Win;
-
+    //For Health updates
+    public Health HealthUpdate = null;
+    //Will follow the cursor by default
     bool follow = true;
+    public AudioSource Suck;
 
-    // Start is called before the first frame update
     void Start()
     {
+        //Add to the list that will be used to check if any are left
         Win.LeechList.Add(this);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (follow == true)
@@ -25,6 +28,7 @@ public class Leech : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && follow == true)
         {
             follow = false;
+            StartCoroutine("LeechRemoveHealth");
         }
 
 
@@ -47,7 +51,6 @@ public class Leech : MonoBehaviour
             case "LineT(Clone)":
                 Destroy(gameObject);
                 break;
-
         }
     }
 
@@ -56,4 +59,13 @@ public class Leech : MonoBehaviour
         Win.LeechList.Remove(this);
     }
 
+    IEnumerator LeechRemoveHealth()
+    {
+        while (follow == false)
+        {
+            yield return new WaitForSeconds(1f);
+            HealthUpdate.LeechRemoveHealth();
+            Suck.Play();
+        }
+    }
 }

@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Infect : MonoBehaviour
 {
+    //Win Script for list
     public WinCheck Win;
-    //bool LeechCollide = false;
-    // Start is called before the first frame update
+    //Health Script for updating health
+    public Health Health;
+    
+   
     void Start()
     {
+        //Add this object to the infect list
         Win.InfectList.Add(this);
         StartCoroutine("HideInfect");
-
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Start the flashing Coroutine
         StartCoroutine("Flash");
     }
 
@@ -27,22 +30,22 @@ public class Infect : MonoBehaviour
         switch (other.gameObject.name)
         {
             case "Leech(Clone)":
-                // LeechCollide = true;
                 StartCoroutine(Destroy(other));
                 break;
         }
     }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        //Switch case using the names of the gameobjects
+        switch (other.gameObject.name)
+        {
+            case "Leech(Clone)":
+                StopCoroutine("Destroy");
+                break;
+        }
+    }
 
-    /* 
-     private void OnCollisionStay2D(Collision2D collision)
-     {
-         if (LeechCollide == true)
-         {
-             if (timer == 0)
-             { }
-         }
-     }
-     */
+    //Inital hide
     IEnumerator HideInfect()
     {
         yield return new WaitForSeconds(3f);
@@ -50,10 +53,10 @@ public class Infect : MonoBehaviour
         sprite.sortingOrder = -4;
         StopCoroutine("HideInfect");
     }
-
+    //Flashing
     IEnumerator Flash()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         SpriteRenderer sprite = this.GetComponent<SpriteRenderer>();
         sprite.sortingOrder = -2;
         yield return new WaitForSeconds(1f);
@@ -63,11 +66,12 @@ public class Infect : MonoBehaviour
 
     IEnumerator Destroy(Collision2D other)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         
         if (other.gameObject.name == "Leech(Clone)")
         {
             Destroy(this.gameObject);
+            Health.LeechAddHealth();
         }
         StopCoroutine("Destroy");
 
@@ -75,6 +79,7 @@ public class Infect : MonoBehaviour
    
     private void OnDestroy()
     {
+        //Remove this object from list
         Win.InfectList.Remove(this);
     }
 }

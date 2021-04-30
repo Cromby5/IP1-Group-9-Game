@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
 
-    public Slider slider;
-    public Gradient gradient;
-    public Image fill;
+    public Slider slider; //For controling our slider values
+    public Gradient gradient; // Gradient going from Green Yellow Red
+    public Image fill; // All Green Fill 
 
     public void SetMaxHealth(int health)
     {

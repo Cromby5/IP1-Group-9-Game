@@ -6,15 +6,18 @@ public class StethoscopeScript : MonoBehaviour
 {
      GameObject Sthetho;
      public AudioSource Heart;
-    // Start is called before the first frame update
-    void Start()
+    public AudioSource Fail;
+    public Crosshair Cross;
+
+    private void OnEnable()
     {
-        
+        //Change Crosshair to SthethoScope
+        Cross.CrossHairStethoscope();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //If left mouse clicked
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -26,10 +29,13 @@ public class StethoscopeScript : MonoBehaviour
             {
                 case "Heart":
                     Debug.Log("Heart Touched");
+                    //Find the gameobject 
                     Sthetho = GameObject.Find(hit.collider.gameObject.name);
+                    //Start the Delay Coroutine with the object found
                     StartCoroutine(Delay(Sthetho));
                     break;
                 default:
+                    Fail.Play();
                     Debug.Log(hit.collider.gameObject.name);
                     break;
             }
@@ -37,10 +43,13 @@ public class StethoscopeScript : MonoBehaviour
     }
     IEnumerator Delay(GameObject Template)
     {
+        //HeartBeat Sound
         Heart.Play();
+        //Wait x seconds while sound plays
         yield return new WaitForSeconds(5f);
+        //Destroy the template
         Destroy(Template);
-
+        //Stop this 
         StopCoroutine("Delay");
     }
 }

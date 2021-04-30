@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class CutL : MonoBehaviour
 {
-   public WinCheck Win;
+   public WinCheck Win; //For adding this to the list in win
 
+    //Create and set speed
     public float speed = 0.2f;
     //Default DirectionX and Y are set 
     protected float directionX = 1.0f;
 
     void Start()
     {
+        //Add to list
         Win.CutList.Add(this);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        //Movement
         Vector3 position = transform.localPosition;
         position.x += speed * directionX;
         transform.localPosition = position;
@@ -37,6 +40,24 @@ public class CutL : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        //Remove from list
+        Win.CutList.Remove(this);
+    }
+    IEnumerator Flip()
+    {
+        //This is because collison broke idk so we will do a fixed time before the flip
+        //Wait for x seconds before flip
+        yield return new WaitForSeconds(0.3f);
+        //Flip Direction
+        directionX = -directionX;
+        //Stop
+        StopCoroutine("Flip");
+
+    }
+
+    //Not working experimental method
     bool ColliderContainsPoint(Transform ColliderTransform, Vector3 Point, bool Enabled)
     {
         Vector3 localPos = ColliderTransform.InverseTransformPoint(Point);
@@ -45,16 +66,5 @@ public class CutL : MonoBehaviour
         else
             return false;
     }
-    private void OnDestroy()
-    {
-        Win.CutList.Remove(this);
-    }
-    IEnumerator Flip()
-    {
-        //This is because collison broke idk
-        yield return new WaitForSeconds(0.3f);
-        directionX = -directionX;
-        StopCoroutine("Flip");
-
-    }
+    //
 }
