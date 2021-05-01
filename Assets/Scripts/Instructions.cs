@@ -6,6 +6,8 @@ public class Instructions : MonoBehaviour
 {
     public Rules rules;
     public AudioSource Menu;
+    public GameObject Main;
+    public GameObject Settings;
 
     public void ShowRules()
     {
@@ -22,5 +24,21 @@ public class Instructions : MonoBehaviour
         //Display rule display
         rules.gameObject.SetActive(false);
 
+    }
+
+    public void ShowSettings()
+    {
+        //Play menu sound 
+        Menu.Play();
+        Settings.SetActive(true);
+        Main.SetActive(false);
+    }
+
+    public void HideSettings()
+    {
+        //Play menu sound 
+        Menu.Play();
+        Settings.SetActive(false);
+        Main.SetActive(true);
     }
 }

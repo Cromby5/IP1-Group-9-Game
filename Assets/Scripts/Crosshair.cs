@@ -25,7 +25,6 @@ public class Crosshair : MonoBehaviour
         //Updating the mouse positon
         Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector2(cursorPos.x, cursorPos.y);
-       
     }
 
     public void CrossHairSyringe()

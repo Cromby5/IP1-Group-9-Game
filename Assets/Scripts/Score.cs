@@ -9,13 +9,18 @@ public class Score : MonoBehaviour
     int LocalScore = 100000; //Score to count down from
     public Text Score_Display; //Score Display
     public Text Win_Display; //Win Text
+    bool Final = false;
 
     void Update()
     {
-        if (Win_Display.isActiveAndEnabled)
+        if (Win_Display.isActiveAndEnabled && Final == false)
         {
             //Sets final score of stage
             SetFinal();
+        }
+        else if (Win_Display.isActiveAndEnabled)
+        {
+            //Blank
         }
         else
         {
@@ -29,6 +34,7 @@ public class Score : MonoBehaviour
     void SetFinal()
     {
         //Sets final score
-        ScoreStore = LocalScore;
+        ScoreStore += LocalScore;
+        Final = true;
     }
 }

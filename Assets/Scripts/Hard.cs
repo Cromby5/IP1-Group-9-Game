@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Hard : MonoBehaviour
 {
-
     public static bool HardEnable = true; //Storing if hard is enabled or not and allowing it to go between scenes
     public AudioSource Menu; //Menu Sound
     public TextMeshProUGUI textDisplay;

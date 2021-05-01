@@ -7,13 +7,12 @@ public class TweezerScript : MonoBehaviour
     public Leech LeechTemp; //Leech template to use
     public Crosshair Cross; // Crosshair 
 
-
     private void OnEnable()
     {
         //Tweezer crosshair
         Cross.CrossHairTweezer();
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -40,9 +39,6 @@ public class TweezerScript : MonoBehaviour
                     Debug.Log(hit.collider.gameObject.name);
                     break;
             }
-
         }
     }
-
-
 }
