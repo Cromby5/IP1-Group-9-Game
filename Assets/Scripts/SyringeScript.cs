@@ -34,6 +34,9 @@ public class SyringeScript : MonoBehaviour
                     AudioSuccess.Play();
                     Destroy(hit.collider.gameObject);
                     break;
+                case "Background":
+                    Debug.Log("Back");
+                    break;
                 default:
                     AudioFail.Play();
                     Debug.Log(hit.collider.gameObject.name);
