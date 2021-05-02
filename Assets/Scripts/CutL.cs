@@ -5,12 +5,12 @@ using UnityEngine;
 public class CutL : MonoBehaviour
 {
    public WinCheck Win; //For adding this to the list in win
-
+   public Health Health; // For if you do something in wrong order
     //Create and set speed
     public float speed = 0.2f;
     //Default DirectionX and Y are set 
     protected float directionX = 1.0f;
-
+   
     void Start()
     {
         //Add to list
@@ -35,7 +35,16 @@ public class CutL : MonoBehaviour
             case "LineT(Clone)":
                 Debug.Log("ByeCut");
                 Destroy(GameObject.FindWithTag("Cut"));
-                Destroy(this.gameObject);
+                if (Win.InjectList.Count == 0)
+                {
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    Debug.Log("Fail");
+                    Destroy(this.gameObject);
+                    Health.ArmCut();
+                }
                 break;
         }
     }

@@ -56,6 +56,18 @@ public class Health : MonoBehaviour
             Restart.StartCoroutine("RestartLevel");
         }
     }
+    public void ArmCut()
+    {
+        //0 health
+        Life = 0;
+        //Healthbar update
+        healthbar.SetHealth(Life);
+        //For hard mode
+        if (Life == 0 && Health_Display.isActiveAndEnabled)
+        {
+            Restart.StartCoroutine("RestartLevel");
+        }
+    }
     public void LeechAddHealth()
     {
         Life += 10;
