@@ -48,6 +48,10 @@ public class LineTest : MonoBehaviour
 
 
                 break;
+            case "Background":
+                //Destroys the line created
+                Drawer.DestroyLine(this);
+                break;
             case "Leech(Clone)":
                 //Destroys the line created
                 Miss.Play();

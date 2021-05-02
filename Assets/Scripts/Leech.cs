@@ -10,6 +10,7 @@ public class Leech : MonoBehaviour
     public Health HealthUpdate = null;
     //Will follow the cursor by default
     bool follow = true;
+    bool damage = false;
     public AudioSource Suck;
 
     void Start()
@@ -53,7 +54,36 @@ public class Leech : MonoBehaviour
                 break;
         }
     }
-
+    void OnCollisionStay2D(Collision2D other)
+    {
+        switch (other.gameObject.name)
+        {
+            case "Leg":
+                damage = true;
+                break;
+        }
+        switch (other.gameObject.tag)
+        {
+            case "Infect":
+                damage = true;
+                break;
+        }
+    }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        switch (other.gameObject.name)
+        {
+            case "Leg":
+                damage = false;
+                break;
+        }
+        switch (other.gameObject.tag)
+        {
+            case "Infect":
+                damage = false;
+                break;
+        }
+    }
     private void OnDestroy()
     {
         Win.LeechList.Remove(this);
@@ -61,7 +91,7 @@ public class Leech : MonoBehaviour
 
     IEnumerator LeechRemoveHealth()
     {
-        while (follow == false)
+        while (follow == false && damage == true)
         {
             yield return new WaitForSeconds(1f);
             HealthUpdate.LeechRemoveHealth();

@@ -8,7 +8,7 @@ public class Infect : MonoBehaviour
     public WinCheck Win;
     //Health Script for updating health
     public Health Health;
-    
+    bool Stay = false;
    
     void Start()
     {
@@ -30,7 +30,9 @@ public class Infect : MonoBehaviour
         switch (other.gameObject.name)
         {
             case "Leech(Clone)":
-                StartCoroutine(Destroy(other));
+                Debug.Log("Suck Start");
+                Stay = true;
+                StartCoroutine("Destroy");
                 break;
         }
     }
@@ -40,6 +42,8 @@ public class Infect : MonoBehaviour
         switch (other.gameObject.name)
         {
             case "Leech(Clone)":
+                Debug.Log("Suck Stop");
+                Stay = false;
                 StopCoroutine("Destroy");
                 break;
         }
@@ -64,11 +68,11 @@ public class Infect : MonoBehaviour
         StopCoroutine("Flash");
     }
 
-    IEnumerator Destroy(Collision2D other)
+    IEnumerator Destroy()
     {
         yield return new WaitForSeconds(4f);
         
-        if (other.gameObject.name == "Leech(Clone)")
+        if (Stay == true)
         {
             Destroy(this.gameObject);
             Health.LeechAddHealth();
